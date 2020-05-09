@@ -1,0 +1,9 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.idea
+report-*
+data_out/*
+GOOGLE_ANALYTICS.token
+
