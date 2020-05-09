@@ -3,111 +3,129 @@
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
 
-# The UI main function
-no_ui <- fluidPage(
+dash_header <- dashboardHeader(
+  title = "matt-deseq2"
+)
+
+dash_sidebar <- dashboardSidebar(
+  sidebarMenu(
+    menuItem("Data Upload", tabName = "data-upload", icon = icon("dashboard")),
+    menuItem("Data Statistics", tabName = "data-stats", icon = icon("chart-bar")),
+    menuItem("DESeq2 Analysis", tabName = "analysis", icon = icon("microscope")),
+    menuItem("Data Download", tabName = "data-download", icon = icon("download")),
+    menuItem("Visualization", tabName = "data-visualization", icon = icon("chart-pie"))
+  )
+)
+
+dash_body <- dashboardBody(
   # Google Analytics Token, see `modules/google_analytics.R`
   tags$head(`_google_analytics_tag_html`(GA_TOKEN)),
 
-  titlePanel("Matt-DESeq2", windowTitle = 'matt-deseq2'),
+  tabItems(
+    tabItem(
+      tabName = "data-upload",
 
-  # Sidebar layout with input and output definitions ----
-  sidebarLayout(
+      # Top Row: Feature Count Upload ----
+      fluidRow(
+        box(
+          title = "Upload Feature Count Data",
+          width = 3,
+          collapsible = TRUE,
+          status = 'warning',
+          solidHeader = FALSE,
 
-    # Sidebar panel for inputs ----
-    sidebarPanel(
+          p(
+            class = "text-muted",
+            "Please select a CSV file containing your feature counts for each gene."
+          ),
 
-      # Input: Slider for the number of bins ----
-      sliderInput(inputId = "bins",
-                  label = "Number of bins:",
-                  min = 1,
-                  max = 50,
-                  value = 30)
+          h5("CSV Loader Settings"),
 
-    ),
+          # Input: Select separator ----
+          selectInput(
+            inputId = "sep",
+            label = "Seperator:",
+            choices = c(
+              "Comma" = ",",
+              "Semicolon" = ";",
+              "Tab" = "\t"
+            ),
+            selected = ",",
+            multiple = FALSE
+          ),
 
-    # Main panel for displaying outputs ----
-    mainPanel(
+          # Input: Select quotes ----
+          selectInput(
+            inputId = "quote",
+            label = "Quote",
+            choices = c(
+              "None" = "",
+              "Double Quote" = '"',
+              "Single Quote" = "'"
+            ),
+            selected = '"',
+            multiple = FALSE
+          ),
 
-      # Output: Histogram ----
-      plotOutput(outputId = "distPlot")
+          # Input: Checkbox if file has header ----
+          checkboxGroupInput(
+            inputId = "header",
+            label = "Header Parsing",
+            choices = list("File has a header"),
+            selected = "File has a header"
+          ),
 
-    )
-  )
-)
+          tags$hr(),
 
-no_ui <- fluidPage(
+          # Input: Select a file ----
+          fileInput(
+            inputId = "file1",
+            label = "Choose CSV File",
+            multiple = FALSE,
+            accept = c(
+              "text/csv",
+              "text/comma-separated-values,text/plain",
+              ".csv"
+            )
+          )
 
-  # App title ----
-  titlePanel("Uploading Files"),
+        ),
 
-  # Sidebar layout with input and output definitions ----
-  sidebarLayout(
+        box(
+          title = "Feature Counts",
+          width = 9,
+          collapsible = TRUE,
+          solidHeader = FALSE,
 
-    # Sidebar panel for inputs ----
-    sidebarPanel(
-
-      # Input: Select a file ----
-      fileInput("file1", "Choose CSV File",
-                multiple = FALSE,
-                accept = c("text/csv",
-                         "text/comma-separated-values,text/plain",
-                         ".csv")),
-
-      # Horizontal line ----
-      tags$hr(),
-
-      # Input: Checkbox if file has header ----
-      checkboxInput("header", "Header", TRUE),
-
-      # Input: Select separator ----
-      radioButtons("sep", "Separator",
-                   choices = c(Comma = ",",
-                               Semicolon = ";",
-                               Tab = "\t"),
-                   selected = ","),
-
-      # Input: Select quotes ----
-      radioButtons("quote", "Quote",
-                   choices = c(None = "",
-                               "Double Quote" = '"',
-                               "Single Quote" = "'"),
-                   selected = '"'),
-
-      # Horizontal line ----
-      tags$hr(),
-
-      # Input: Select number of rows to display ----
-      radioButtons("disp", "Display",
-                   choices = c(Head = "head",
-                               All = "all"),
-                   selected = "head")
-
-    ),
-
-    # Main panel for displaying outputs ----
-    mainPanel(
-
-      # Output: Data file ----
-      tableOutput("contents")
-
-    )
-
-  )
-)
-
-
-ui <- dashboardPage(
-  dashboardHeader(title = "Basic dashboard"),
-  dashboardSidebar(),
-  dashboardBody(
-    # Boxes need to be put in a row (or column)
-    fluidRow(
-      box(plotOutput("plot1", height = 250)),
-
-      box(
-        title = "Controls",
-        sliderInput("slider", "Number of observations:", 1, 100, 50)
+        )
       )
+    ),
+
+    tabItem(
+      tabName = "data-stats",
+      h2("Data Statistics")
+    ),
+
+    tabItem(
+      tabName = "analysis",
+      h2("DESeq2 Analysis")
+    ),
+
+    tabItem(
+      tabName = "data-download",
+      h2("Data Download")
+    ),
+
+    tabItem(
+      tabName = "data-visualization",
+      h2("Visualization")
     )
   )
+)
+
+# The UI main function
+ui <- dashboardPage(
+  dash_header,
+  dash_sidebar,
+  dash_body,
 )
