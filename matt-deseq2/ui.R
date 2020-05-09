@@ -27,72 +27,32 @@ dash_body <- dashboardBody(
 
       # Top Row: Feature Count Upload ----
       fluidRow(
-        box(
+        csvFileBoxInput(
+          inputId = "csv-feature-counts",
           title = "Upload Feature Count Data",
           width = 3,
-          collapsible = TRUE,
-          status = 'warning',
-          solidHeader = FALSE,
-
-          p(
-            class = "text-muted",
-            "Please select a CSV file containing your feature counts for each gene."
-          ),
-
-          h5("CSV Loader Settings"),
-
-          # Input: Select separator ----
-          selectInput(
-            inputId = "sep",
-            label = "Seperator:",
-            choices = c(
-              "Comma" = ",",
-              "Semicolon" = ";",
-              "Tab" = "\t"
-            ),
-            selected = ",",
-            multiple = FALSE
-          ),
-
-          # Input: Select quotes ----
-          selectInput(
-            inputId = "quote",
-            label = "Quote",
-            choices = c(
-              "None" = "",
-              "Double Quote" = '"',
-              "Single Quote" = "'"
-            ),
-            selected = '"',
-            multiple = FALSE
-          ),
-
-          # Input: Checkbox if file has header ----
-          checkboxGroupInput(
-            inputId = "header",
-            label = "Header Parsing",
-            choices = list("File has a header"),
-            selected = "File has a header"
-          ),
-
-          tags$hr(),
-
-          # Input: Select a file ----
-          fileInput(
-            inputId = "file1",
-            label = "Choose CSV File",
-            multiple = FALSE,
-            accept = c(
-              "text/csv",
-              "text/comma-separated-values,text/plain",
-              ".csv"
-            )
-          )
-
+          text = "Please select a CSV file containing your feature counts for each gene."
         ),
-
         box(
           title = "Feature Counts",
+          width = 9,
+          collapsible = TRUE,
+          solidHeader = FALSE,
+
+        )
+      ),
+
+      # Bottom Row: Column Data Upload ----
+      fluidRow(
+        csvFileBoxInput(
+          inputId = "csv-column-data",
+          title = "Upload Column Data",
+          width = 3,
+          text = "Please select a CSV file containing the column metadata describing your
+          experiment conditions."
+        ),
+        box(
+          title = "Column Data",
           width = 9,
           collapsible = TRUE,
           solidHeader = FALSE,
