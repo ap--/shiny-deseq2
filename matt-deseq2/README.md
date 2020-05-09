@@ -7,6 +7,7 @@ So here is a DESeq2 analysis running in R with a shiny frontend.
 You can access the online version at _INSERT LINK TO APP_.
 
 ### Contribute
+- I have no clue how to do DESeq2, so I'm very happy if you want to help :blush:
 - If this is somewhat useful to you drop me a message!
 - If you find scientific mistakes anywhere in the analysis pipeline file a bug and let me know!
-- (I have no clue how to do DESeq2, so I'm very happy if you want to help :blush: )
+- If you know better ways to do this, or visualize it send me a message!
