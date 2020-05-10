@@ -13,7 +13,10 @@ server <- function(input, output) {
 
   # column meta data
   data_column_data <- callModule(csvFileBox, "csv_column_data")
-  output$csv_column_data_table <- DT::renderDataTable({
-    data_column_data()
-  })
+  output$csv_column_data_table <- DT::renderDataTable(
+    {
+      data_column_data()
+    },
+    options = list(scrollX = TRUE)
+  )
 }

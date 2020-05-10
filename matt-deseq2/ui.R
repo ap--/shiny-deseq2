@@ -19,7 +19,12 @@ dash_sidebar <- dashboardSidebar(
 
 dash_body <- dashboardBody(
   # Google Analytics Token, see `modules/google_analytics.R`
-  tags$head(`_google_analytics_tag_html`(GA_TOKEN)),
+  tags$head(
+    `_google_analytics_tag_html`(GA_TOKEN),
+  ),
+  tags$style(
+    HTML(".dataTables_wrapper { overflow-x: scroll; }")
+  ),
 
   tabItems(
     tabItem(
@@ -42,9 +47,11 @@ dash_body <- dashboardBody(
             class = "text-muted",
             "Showing the Feature Count Data loaded from your CSV"
           ),
-          DT::dataTableOutput(
-            outputId = "csv_feature_count_table"
-          )
+          column(
+            DT::dataTableOutput(
+              outputId = "csv_feature_count_table"
+            )
+          , width = 12)
         )
       ),
 
