@@ -6,6 +6,7 @@
 library(tidyverse)
 library(shiny)
 library(shinydashboard)
+library(DT)
 
 # Google Analytics ----
 source('modules/google_analytics.R', local = FALSE)
