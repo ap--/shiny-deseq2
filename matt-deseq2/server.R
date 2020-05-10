@@ -2,11 +2,6 @@
 # ==================
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
-abc <- read.csv('../featurecount_new ID.csv',
-         header = TRUE,
-         quote = '"',
-         stringsAsFactors = FALSE)
-
 # Define server logic ----
 server <- function(input, output) {
 
