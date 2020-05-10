@@ -38,7 +38,7 @@ csvFileBoxInput <- function(inputId, title, width, text) {
     # Input: Select quotes ----
     selectInput(
       inputId = ns("quote"),
-      label = "Quote",
+      label = "Quote:",
       choices = c(
         "None" = "",
         "Double Quote" = '"',
@@ -51,7 +51,7 @@ csvFileBoxInput <- function(inputId, title, width, text) {
     # Input: Checkbox if file has header ----
     checkboxGroupInput(
       inputId = ns("header"),
-      label = "Header Parsing",
+      label = "Header Parsing:",
       choices = list("File has a header"),
       selected = "File has a header"
     ),
@@ -61,7 +61,7 @@ csvFileBoxInput <- function(inputId, title, width, text) {
     # Input: Select a file ----
     fileInput(
       inputId = ns("csvfile"),
-      label = "Choose CSV File",
+      label = "Choose CSV File:",
       multiple = FALSE,
       accept = c(
         "text/csv",
@@ -84,15 +84,17 @@ csvFileBox <- function(input, output, session) {
 
   # The user's data, parsed into a data frame
   dataframe <- reactive({
+    print(input$header)
+    print(input$quote)
     read.csv(userFile()$datapath,
-      header = input$header,
+      header = !is.null(input$header),  # I hate you R.
       quote = input$quote,
       stringsAsFactors = FALSE)
   })
 
   # We can run observers in here if we want to
   observe({
-    msg <- sprintf("File %s was uploaded", userFile()$name)
+    msg <- sprintf("File %s uploaded with %d rows", userFile()$name, length(dataframe()))
     cat(msg, "\n")
   })
 
