@@ -38,6 +38,10 @@ dash_body <- dashboardBody(
           width = 9,
           collapsible = TRUE,
           solidHeader = FALSE,
+          p(
+            class = "text-muted",
+            "Showing the Feature Count Data loaded from your CSV"
+          ),
           DT::dataTableOutput(
             outputId = "csv_feature_count_table"
           )
@@ -58,6 +62,10 @@ dash_body <- dashboardBody(
           width = 9,
           collapsible = TRUE,
           solidHeader = FALSE,
+          p(
+            class = "text-muted",
+            "Showing the Column Data loaded from your CSV"
+          ),
           DT::dataTableOutput(
             outputId = "csv_column_data_table"
           )
