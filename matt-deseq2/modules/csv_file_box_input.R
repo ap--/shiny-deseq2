@@ -94,7 +94,7 @@ csvFileBox <- function(input, output, session) {
 
   # We can run observers in here if we want to
   observe({
-    msg <- sprintf("File %s uploaded with %d rows", userFile()$name, length(dataframe()))
+    msg <- sprintf("File %s uploaded with %d cols %d rows", userFile()$name, ncol(dataframe()), nrow(dataframe()))
     cat(msg, "\n")
   })
 
