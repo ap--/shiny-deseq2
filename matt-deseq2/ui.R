@@ -28,7 +28,7 @@ dash_body <- dashboardBody(
       # Top Row: Feature Count Upload ----
       fluidRow(
         csvFileBoxInput(
-          inputId = "csv-feature-counts",
+          inputId = "csv_feature_counts",
           title = "Upload Feature Count Data",
           width = 3,
           text = "Please select a CSV file containing your feature counts for each gene."
@@ -38,14 +38,16 @@ dash_body <- dashboardBody(
           width = 9,
           collapsible = TRUE,
           solidHeader = FALSE,
-
+          DT::dataTableOutput(
+            outputId = "csv_feature_count_table"
+          )
         )
       ),
 
       # Bottom Row: Column Data Upload ----
       fluidRow(
         csvFileBoxInput(
-          inputId = "csv-column-data",
+          inputId = "csv_column_data",
           title = "Upload Column Data",
           width = 3,
           text = "Please select a CSV file containing the column metadata describing your
@@ -56,7 +58,9 @@ dash_body <- dashboardBody(
           width = 9,
           collapsible = TRUE,
           solidHeader = FALSE,
-
+          DT::dataTableOutput(
+            outputId = "csv_column_data_table"
+          )
         )
       )
     ),
