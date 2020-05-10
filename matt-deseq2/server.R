@@ -2,35 +2,23 @@
 # ==================
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
-# Define server logic required to draw a histogram ----
-no_server <- function(input, output) {
+abc <- read.csv('../featurecount_new ID.csv',
+         header = TRUE,
+         quote = '"',
+         stringsAsFactors = FALSE)
 
-  # Histogram of the Old Faithful Geyser Data ----
-  # with requested number of bins
-  # This expression that generates a histogram is wrapped in a call
-  # to renderPlot to indicate that:
-  #
-  # 1. It is "reactive" and therefore should be automatically
-  #    re-executed when inputs (input$bins) change
-  # 2. Its output type is a plot
-  output$distPlot <- renderPlot({
-    x <- faithful$waiting
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-    hist(x,
-      breaks = bins, col = "#75AADB", border = "white",
-      xlab = "Waiting time to next eruption (in mins)",
-      main = "Histogram of waiting times"
-    )
-  })
-}
-
+# Define server logic ----
 server <- function(input, output) {
-  set.seed(122)
-  histdata <- rnorm(500)
 
-  output$plot1 <- renderPlot({
-    data <- histdata[seq_len(input$slider)]
-    hist(data)
+  # feature counts
+  data_feature_counts <- callModule(csvFileBox, "csv_feature_counts")
+  output$csv_feature_count_table <- DT::renderDataTable({
+    data_feature_counts()
+  })
+
+  # column meta data
+  data_column_data <- callModule(csvFileBox, "csv_column_data")
+  output$csv_column_data_table <- DT::renderDataTable({
+    data_column_data()
   })
 }
