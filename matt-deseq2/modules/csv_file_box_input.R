@@ -12,7 +12,7 @@ csvFileBoxInput <- function(inputId, title, width, text) {
     title = title,
     width = width,
     collapsible = TRUE,
-    status = 'warning',
+    status = "warning",
     solidHeader = FALSE,
 
     p(
@@ -69,7 +69,6 @@ csvFileBoxInput <- function(inputId, title, width, text) {
         ".csv"
       )
     )
-
   )
 }
 
@@ -87,14 +86,18 @@ csvFileBox <- function(input, output, session) {
     print(input$header)
     print(input$quote)
     read.csv(userFile()$datapath,
-      header = !is.null(input$header),  # I hate you R.
+      header = !is.null(input$header), # I hate you R.
       quote = input$quote,
-      stringsAsFactors = FALSE)
+      stringsAsFactors = FALSE
+    )
   })
 
   # We can run observers in here if we want to
   observe({
-    msg <- sprintf("File %s uploaded with %d cols %d rows", userFile()$name, ncol(dataframe()), nrow(dataframe()))
+    msg <- sprintf(
+      "File %s uploaded with %d cols %d rows",
+      userFile()$name, ncol(dataframe()), nrow(dataframe())
+    )
     cat(msg, "\n")
   })
 
