@@ -1,10 +1,21 @@
 # matt-deseq2
-phony: run help
+PORT ?= 8080
 
-run:
-	R -e "shiny::runApp('./', port=8080)"
+.PHONY: help run debug
 
 help:
-	echo 'call via `make run` to run the app'
+	@echo
+	@echo "matt-deseq2 usage:"
+	@echo "  make <target>"
+	@echo
+	@echo "targets:"
+	@echo "  help   print this help"
+	@echo "  run    run the app (127.0.0.1:$(PORT))"
+	@echo "  debug  run the app in showcase mode"
+	@echo
 
-all: help
+run:
+	R -e "shiny::runApp('./', port=$(PORT))"
+
+debug:
+	R -e "shiny::runApp('./', port=$(PORT), display.mode='showcase')"
