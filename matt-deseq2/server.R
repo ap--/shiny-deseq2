@@ -7,16 +7,26 @@ server <- function(input, output) {
   # store common state in reactiveValues
   state <- reactiveValues(
     num_genes = 0,
-    num_conditions = 0
+    num_unique_genes = 0,
+    num_conditions = 0,
+    num_unique_conditions = 0
   )
 
-  # feature counts
+  # feature counts ----
   data_feature_counts <- callModule(csvFileBox, "csv_feature_counts")
   data_select_cols_feature_counts <- callModule(
     indexColumnSelectBox,
     "select_rowcol_feature_counts",
     data_feature_counts
   )
+  observe({
+    selection <- data_select_cols_feature_counts
+    df <- data_feature_counts()
+    req(selection$rownames, df)
+    state$num_genes <- nrow(df)
+    state$num_unique_genes <- n_distinct(df[selection$rownames])
+  })
+  # filter columns of dataframe in reactive variable for reuse in other tabs
   data_fc_filter_0 <- reactive({
     selection <- data_select_cols_feature_counts
     df <- data_feature_counts()
@@ -27,31 +37,49 @@ server <- function(input, output) {
       column_to_rownames(var = selection$rownames) %>%
       as.data.frame()
   })
+  # display in table
   output$csv_feature_count_table <- DT::renderDataTable(
     {
       data_fc_filter_0()
     },
     options = list(scrollX = TRUE)
   )
+  # update value box on top
   output$data_upload_value_box_genes <- renderValueBox({
+    value <- state$num_genes
+    subtitle <- "Number of Genes"
+    color <- "red"
+    if (state$num_genes > 0) {
+      color <- "green"
+      if (state$num_genes != state$num_unique_genes) {
+        value <- sprintf("%d / %d", state$num_unique_genes, state$num_genes)
+        subtitle <- "Number of Genes (WARNING: not all are unique!)"
+        color <- "yellow"
+      }
+    }
     valueBox(
-      subtitle = "Number of Genes",
-      value = state$num_genes,
-      color = ifelse(state$num_genes > 0, "green", "red"),
+      subtitle = subtitle,
+      value = value,
+      color = color,
       icon = icon("dna")
     )
   })
-  observe({
-    state$num_genes <- nrow(data_feature_counts())
-  })
 
-  # column meta data
+  # column meta data ----
   data_column_data <- callModule(csvFileBox, "csv_column_data")
   data_select_cols_column_data <- callModule(
     indexColumnSelectBox,
     "select_rowcol_column_data",
     data_column_data
   )
+  observe({
+    df <- data_column_data()
+    selection <- data_select_cols_column_data
+    req(selection$colnames, df)
+    state$num_conditions <- nrow(df)
+    state$num_unique_conditions <- n_distinct(df[selection$colnames])
+  })
+  # filter columns of dataframe in reactive variable for reuse in other tabs
   data_cd_filter_0 <- reactive({
     selection <- data_select_cols_column_data
     req(selection$rownames, selection$colnames, df)
@@ -62,21 +90,24 @@ server <- function(input, output) {
       column_to_rownames(var = selection$rownames) %>%
       as.data.frame()
   })
+  # display in table
   output$csv_column_data_table <- DT::renderDataTable(
     {
       data_cd_filter_0()
     },
     options = list(scrollX = TRUE)
   )
+  # update value box on top
   output$data_upload_value_box_conditions <- renderValueBox({
+    value <- "0"
+    if (state$num_conditions > 0) {
+      value <- sprintf("%d unique of %d total", state$num_unique_conditions, state$num_conditions)
+    }
     valueBox(
       subtitle = "Number of Experiment Conditions",
-      value = state$num_conditions,
+      value = value,
       color = ifelse(state$num_conditions > 0, "green", "red"),
       icon = icon("vials")
     )
-  })
-  observe({
-    state$num_conditions <- nrow(data_column_data())
   })
 }
