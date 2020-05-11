@@ -40,6 +40,16 @@ indexColumnSelectBox <- function(input, output, session, data) {
     colnames(data())
   })
 
+  state <- reactiveValues(
+    rownames = "",
+    colnames = ""
+  )
+
+  observe({
+    state$rownames <- input$rowname_column
+    state$colnames <- input$selected_columns
+  })
+
   observe({
     scols <- selectableColumns()
     updateSelectInput(
@@ -55,4 +65,6 @@ indexColumnSelectBox <- function(input, output, session, data) {
       selected = scols[-1]
     )
   })
+
+  return(state)
 }
