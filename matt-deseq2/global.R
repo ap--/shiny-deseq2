@@ -13,4 +13,5 @@ source('modules/google_analytics.R', local = FALSE)
 GA_TOKEN <- str_trim(read_file(here("GOOGLE_ANALYTICS.token")))
 
 # Reusable Modules ----
-source('modules/csv_file_box_input.R', local = FALSE)
+source("modules/csv_file_box_input.R", local = FALSE)
+source("modules/index_column_select_box_input.R", local = FALSE)

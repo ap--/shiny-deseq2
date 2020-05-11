@@ -49,4 +49,15 @@ server <- function(input, output) {
   observe({
     state$num_conditions <- nrow(data_column_data())
   })
+
+  data_select_cols_feature_counts <- callModule(
+    indexColumnSelectBox,
+    "select_rowcol_feature_counts",
+    data_feature_counts
+  )
+  data_select_cols_column_data <- callModule(
+    indexColumnSelectBox,
+    "select_rowcol_column_data",
+    data_column_data
+  )
 }

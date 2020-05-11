@@ -24,10 +24,11 @@ dash_body <- dashboardBody(
   ),
 
   tabItems(
+    # Data Upload Tab ----
     tabItem(
       tabName = "data-upload",
 
-      # Indicators
+      # Indicators ----
       fluidRow(
         valueBoxOutput("data_upload_value_box_genes", width = 6),
         valueBoxOutput("data_upload_value_box_conditions", width = 6)
@@ -80,6 +81,27 @@ dash_body <- dashboardBody(
           DT::dataTableOutput(
             outputId = "csv_column_data_table"
           )
+        )
+      ),
+
+      # data selection and association ----
+      fluidRow(
+        indexColumnSelectBoxInput(
+          inputId = "select_rowcol_feature_counts",
+          title = "Configure Feature Count Data",
+          width = 6,
+          text = "Please configure the rownames and columns for the feature count data.",
+          rowname_label = "Gene Names",
+          columns_label = "Condition Columns"
+        ),
+
+        indexColumnSelectBoxInput(
+          inputId = "select_rowcol_column_data",
+          title = "Configure Column Data",
+          width = 6,
+          text = "Please configure the rownames and columns for the column data.",
+          rowname_label = "Condition Labels",
+          columns_label = "Select Meta Data Columns"
         )
       )
     ),
