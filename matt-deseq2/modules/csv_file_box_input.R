@@ -82,22 +82,11 @@ csvFileBox <- function(input, output, session) {
 
   # The user's data, parsed into a data frame
   dataframe <- reactive({
-    print(input$header)
-    print(input$quote)
     read.csv(userFile()$datapath,
       header = !is.null(input$header), # I hate you R.
       quote = input$quote,
       stringsAsFactors = FALSE
     )
-  })
-
-  # We can run observers in here if we want to
-  observe({
-    msg <- sprintf(
-      "File %s uploaded with %d cols %d rows",
-      userFile()$name, ncol(dataframe()), nrow(dataframe())
-    )
-    cat(msg, "\n")
   })
 
   # Return the reactive that yields the data frame
