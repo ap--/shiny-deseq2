@@ -12,7 +12,6 @@ csvFileBoxInput <- function(inputId, title, width, text) {
     title = title,
     width = width,
     collapsible = TRUE,
-    status = "warning",
     solidHeader = FALSE,
 
     p(
