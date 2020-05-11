@@ -105,7 +105,38 @@ dash_body <- dashboardBody(
 
     tabItem(
       tabName = "data-stats",
-      h2("Data Statistics")
+      h2("Data Statistics"),
+
+      fluidRow(
+        box(
+          title = "Counts Histogram of the whole dataset",
+          width = 6,
+          collapsible = TRUE,
+          solidHeader = FALSE,
+          p(
+            class = "text-muted",
+            "Check if this histogram agrees with the required DESeq2 assumptions
+            and do aditional filtering if necessary."
+          ),
+          plotOutput(
+            outputId = "data_stats_hist_all"
+          )
+        ),
+
+        box(
+          title = "Box plots of individual conditions",
+          width = 6,
+          collapsible = TRUE,
+          solidHeader = FALSE,
+          p(
+            class = "text-muted",
+            "Showing boxplots of log2(counts + 1) for all conditions"
+          ),
+          plotOutput(
+            outputId = "data_stats_boxplots_conditions"
+          )
+        )
+      )
     ),
 
     tabItem(

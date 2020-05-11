@@ -7,6 +7,7 @@ library(tidyverse)
 library(shiny)
 library(shinydashboard)
 library(DT)
+library(RColorBrewer)
 
 # Google Analytics ----
 source('modules/google_analytics.R', local = FALSE)

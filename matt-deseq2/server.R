@@ -12,6 +12,7 @@ server <- function(input, output) {
     num_unique_conditions = 0
   )
 
+  # TAB1 --------
   # feature counts ----
   data_feature_counts <- callModule(csvFileBox, "csv_feature_counts")
   data_select_cols_feature_counts <- callModule(
@@ -32,7 +33,7 @@ server <- function(input, output) {
     df <- data_feature_counts()
     req(selection$rownames, selection$colnames, df)
     all_selected <- union(selection$rownames, selection$colnames)
-    df[, all_selected] %>%
+    df <- df[, all_selected] %>%
       remove_rownames() %>%
       column_to_rownames(var = selection$rownames) %>%
       as.data.frame()
@@ -108,6 +109,39 @@ server <- function(input, output) {
       value = value,
       color = ifelse(state$num_conditions > 0, "green", "red"),
       icon = icon("vials")
+    )
+  })
+
+
+  # TAB2 --------
+  output$data_stats_hist_all <- renderPlot({
+    df <- data_fc_filter_0()
+    hist(
+      as.matrix(log2(df + 1)),
+      breaks = 100,
+      col = "orchid4",
+      border = "white",
+      main = "Log2-transformed counts per Gene",
+      xlab = "log2(counts + 1)",
+      ylab = "Number of gene samples",
+      las = 1,
+      cex.axis = 0.7
+    )
+  })
+
+  output$data_stats_boxplots_conditions <- renderPlot({
+    df <- data_fc_filter_0()
+    cd <- data_cd_filter_0()
+    colourCount <- length(unique(cd))
+    getPalette <- colorRampPalette(brewer.pal(9, "Set1"))
+    boxplot(
+      log2(df + 1),
+      getPalette(colourCount),
+      pch = ".",
+      horizontal = TRUE,
+      xlab = "log2(counts + 1)",
+      ylab = "Number of gene samples",
+      las = 1
     )
   })
 }
