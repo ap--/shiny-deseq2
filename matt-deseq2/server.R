@@ -12,9 +12,24 @@ server <- function(input, output) {
 
   # feature counts
   data_feature_counts <- callModule(csvFileBox, "csv_feature_counts")
+  data_select_cols_feature_counts <- callModule(
+    indexColumnSelectBox,
+    "select_rowcol_feature_counts",
+    data_feature_counts
+  )
+  data_fc_filter_0 <- reactive({
+    selection <- data_select_cols_feature_counts
+    df <- data_feature_counts()
+    req(selection$rownames, selection$colnames, df)
+    all_selected <- union(selection$rownames, selection$colnames)
+    df[, all_selected] %>%
+      remove_rownames() %>%
+      column_to_rownames(var = selection$rownames) %>%
+      as.data.frame()
+  })
   output$csv_feature_count_table <- DT::renderDataTable(
     {
-      data_feature_counts()
+      data_fc_filter_0()
     },
     options = list(scrollX = TRUE)
   )
@@ -32,9 +47,24 @@ server <- function(input, output) {
 
   # column meta data
   data_column_data <- callModule(csvFileBox, "csv_column_data")
+  data_select_cols_column_data <- callModule(
+    indexColumnSelectBox,
+    "select_rowcol_column_data",
+    data_column_data
+  )
+  data_cd_filter_0 <- reactive({
+    selection <- data_select_cols_column_data
+    req(selection$rownames, selection$colnames, df)
+    all_selected <- union(selection$rownames, selection$colnames)
+    df <- data_column_data()
+    df[, all_selected] %>%
+      remove_rownames() %>%
+      column_to_rownames(var = selection$rownames) %>%
+      as.data.frame()
+  })
   output$csv_column_data_table <- DT::renderDataTable(
     {
-      data_column_data()
+      data_cd_filter_0()
     },
     options = list(scrollX = TRUE)
   )
@@ -49,15 +79,4 @@ server <- function(input, output) {
   observe({
     state$num_conditions <- nrow(data_column_data())
   })
-
-  data_select_cols_feature_counts <- callModule(
-    indexColumnSelectBox,
-    "select_rowcol_feature_counts",
-    data_feature_counts
-  )
-  data_select_cols_column_data <- callModule(
-    indexColumnSelectBox,
-    "select_rowcol_column_data",
-    data_column_data
-  )
 }
