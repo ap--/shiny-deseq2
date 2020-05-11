@@ -35,16 +35,25 @@ dash_body <- dashboardBody(
       ),
 
       # Top Row: Feature Count Upload ----
+      h2("Feature Counts"),
       fluidRow(
         csvFileBoxInput(
           inputId = "csv_feature_counts",
           title = "Upload Feature Count Data",
-          width = 3,
+          width = 2,
           text = "Please select a CSV file containing your feature counts for each gene."
+        ),
+        indexColumnSelectBoxInput(
+          inputId = "select_rowcol_feature_counts",
+          title = "Configure Feature Count Data",
+          width = 2,
+          text = "Please configure the rownames and columns for the feature count data.",
+          rowname_label = "Gene Names",
+          columns_label = "Condition Columns"
         ),
         box(
           title = "Feature Counts",
-          width = 9,
+          width = 8,
           collapsible = TRUE,
           solidHeader = FALSE,
           p(
@@ -61,17 +70,26 @@ dash_body <- dashboardBody(
       ),
 
       # Bottom Row: Column Data Upload ----
+      h2("Condition Meta Data"),
       fluidRow(
         csvFileBoxInput(
           inputId = "csv_column_data",
           title = "Upload Column Data",
-          width = 3,
+          width = 2,
           text = "Please select a CSV file containing the column metadata describing your
           experiment conditions."
         ),
+        indexColumnSelectBoxInput(
+          inputId = "select_rowcol_column_data",
+          title = "Configure Column Data",
+          width = 2,
+          text = "Please configure the rownames and columns for the column data.",
+          rowname_label = "Condition Labels",
+          columns_label = "Select Meta Data Columns"
+        ),
         box(
           title = "Column Data",
-          width = 9,
+          width = 8,
           collapsible = TRUE,
           solidHeader = FALSE,
           p(
@@ -81,27 +99,6 @@ dash_body <- dashboardBody(
           DT::dataTableOutput(
             outputId = "csv_column_data_table"
           )
-        )
-      ),
-
-      # data selection and association ----
-      fluidRow(
-        indexColumnSelectBoxInput(
-          inputId = "select_rowcol_feature_counts",
-          title = "Configure Feature Count Data",
-          width = 6,
-          text = "Please configure the rownames and columns for the feature count data.",
-          rowname_label = "Gene Names",
-          columns_label = "Condition Columns"
-        ),
-
-        indexColumnSelectBoxInput(
-          inputId = "select_rowcol_column_data",
-          title = "Configure Column Data",
-          width = 6,
-          text = "Please configure the rownames and columns for the column data.",
-          rowname_label = "Condition Labels",
-          columns_label = "Select Meta Data Columns"
         )
       )
     ),
