@@ -27,6 +27,12 @@ dash_body <- dashboardBody(
     tabItem(
       tabName = "data-upload",
 
+      # Indicators
+      fluidRow(
+        valueBoxOutput("data_upload_value_box_genes", width = 6),
+        valueBoxOutput("data_upload_value_box_conditions", width = 6)
+      ),
+
       # Top Row: Feature Count Upload ----
       fluidRow(
         csvFileBoxInput(
@@ -47,8 +53,9 @@ dash_body <- dashboardBody(
           column(
             DT::dataTableOutput(
               outputId = "csv_feature_count_table"
-            )
-          , width = 12)
+            ),
+            width = 12
+          )
         )
       ),
 
