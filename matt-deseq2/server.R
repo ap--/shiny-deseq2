@@ -7,9 +7,12 @@ server <- function(input, output) {
 
   # feature counts
   data_feature_counts <- callModule(csvFileBox, "csv_feature_counts")
-  output$csv_feature_count_table <- DT::renderDataTable({
-    data_feature_counts()
-  })
+  output$csv_feature_count_table <- DT::renderDataTable(
+    {
+      data_feature_counts()
+    },
+    options = list(scrollX = TRUE)
+  )
 
   # column meta data
   data_column_data <- callModule(csvFileBox, "csv_column_data")

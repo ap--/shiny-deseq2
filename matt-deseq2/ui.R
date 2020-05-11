@@ -22,9 +22,6 @@ dash_body <- dashboardBody(
   tags$head(
     `_google_analytics_tag_html`(GA_TOKEN),
   ),
-  tags$style(
-    HTML(".dataTables_wrapper { overflow-x: scroll; }")
-  ),
 
   tabItems(
     tabItem(
