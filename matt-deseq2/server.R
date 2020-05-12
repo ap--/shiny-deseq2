@@ -113,35 +113,57 @@ server <- function(input, output) {
   })
 
 
+  df_tidy <- reactive({
+    df_cd <- data_cd_filter_0() %>%
+      # note: join by rownames isn't supported https://github.com/tidyverse/dplyr/issues/1270
+      # todo: should not allow ___condition___ column, but it'll do for now...
+      rownames_to_column(var = "___condition___")
+    # ? seems I need to assign for the implicit return in expressions to work with pipes
+    df <- data_fc_filter_0() %>%
+      # todo: really should not allow gene column...
+      rownames_to_column(var = "gene") %>%
+      pivot_longer(-gene, names_to = "condition", values_to = "counts") %>%
+      left_join(df_cd, by = c("condition" = "___condition___"))
+  })
+
   # TAB2 --------
   output$data_stats_hist_all <- renderPlot({
-    df <- data_fc_filter_0()
-    hist(
-      as.matrix(log2(df + 1)),
-      breaks = 100,
-      col = "orchid4",
-      border = "white",
-      main = "Log2-transformed counts per Gene",
-      xlab = "log2(counts + 1)",
-      ylab = "Number of gene samples",
-      las = 1,
-      cex.axis = 0.7
-    )
+    df <- df_tidy()
+    # fixme: hist renders significantly faster than geom_histogram
+    # hist(
+    #   as.matrix(log2(df$counts + 1)),
+    #   breaks = 100,
+    #   col = "orchid4",
+    #   border = "white",
+    #   main = "Log2-transformed counts per Gene",
+    #   xlab = "log2(counts + 1)",
+    #   ylab = "Number of gene samples",
+    #   las = 1,
+    #   cex.axis = 0.7
+    # )
+    ggplot(df, aes(x = log2(counts + 1))) +
+      geom_histogram(fill = "orchid4", bins = 100) +
+      labs(title = "Log2-transformed counts per Gene") +
+      xlab("log2(counts + 1)") +
+      ylab("Number of gene samples")
   })
 
   output$data_stats_boxplots_conditions <- renderPlot({
-    df <- data_fc_filter_0()
-    cd <- data_cd_filter_0()
-    colourCount <- length(unique(cd))
-    getPalette <- colorRampPalette(brewer.pal(9, "Set1"))
-    boxplot(
-      log2(df + 1),
-      getPalette(colourCount),
-      pch = ".",
-      horizontal = TRUE,
-      xlab = "log2(counts + 1)",
-      ylab = "Number of gene samples",
-      las = 1
-    )
+    df <- df_tidy()
+    ggplot(df, aes(x = log2(counts + 1), y = condition)) +
+      geom_boxplot()
+    # df <- data_fc_filter_0()
+    # cd <- data_cd_filter_0()
+    # colourCount <- length(unique(cd))
+    # getPalette <- colorRampPalette(brewer.pal(9, "Set1"))
+    # boxplot(
+    #   log2(df + 1),
+    #   getPalette(colourCount),
+    #   pch = ".",
+    #   horizontal = TRUE,
+    #   xlab = "log2(counts + 1)",
+    #   ylab = "Number of gene samples",
+    #   las = 1
+    # )
   })
 }
