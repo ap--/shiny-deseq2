@@ -123,6 +123,11 @@ server <- function(input, output) {
       # todo: really should not allow gene column...
       rownames_to_column(var = "gene") %>%
       pivot_longer(-gene, names_to = "condition", values_to = "counts") %>%
+      # filter genes
+      group_by(gene) %>%
+      filter(sum(counts) >= input$min_total_counts) %>%
+      filter(all(counts >= input$min_condition_counts)) %>%
+      ungroup() %>%
       left_join(df_cd, by = c("condition" = "___condition___"))
   })
 

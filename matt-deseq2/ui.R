@@ -109,6 +109,34 @@ dash_body <- dashboardBody(
 
       fluidRow(
         box(
+          title = "Filter genes",
+          width = 9,
+          collapsible = TRUE,
+          solidHeader = FALSE,
+          p(
+            class = "text-muted",
+            "Adjust these sliders to remove rows that have less than Minimum Counts
+            total accross all conditions."
+          ),
+          column(
+            width = 6,
+            sliderInput("min_condition_counts", "Minimum Counts for each Condition:",
+              min = 0, max = 100,
+              value = 0
+            )
+          ),
+          column(
+            width = 6,
+            sliderInput("min_total_counts", "Minimum Total Counts:",
+              min = 0, max = 100,
+              value = 0
+            )
+          )
+        )
+      ),
+
+      fluidRow(
+        box(
           title = "Counts Histogram of the whole dataset",
           width = 6,
           collapsible = TRUE,
