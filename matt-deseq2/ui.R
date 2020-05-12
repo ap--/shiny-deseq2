@@ -120,7 +120,7 @@ dash_body <- dashboardBody(
           ),
           plotOutput(
             outputId = "data_stats_hist_all"
-          )
+          ) %>% shinycssloaders::withSpinner()
         ),
 
         box(
@@ -134,7 +134,7 @@ dash_body <- dashboardBody(
           ),
           plotOutput(
             outputId = "data_stats_boxplots_conditions"
-          )
+          ) %>% shinycssloaders::withSpinner()
         )
       )
     ),

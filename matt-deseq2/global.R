@@ -9,6 +9,7 @@ library(shinydashboard)
 library(DT)
 library(RColorBrewer)
 library(tictoc)
+library(shinycssloaders)
 
 # Google Analytics ----
 source('modules/google_analytics.R', local = FALSE)
