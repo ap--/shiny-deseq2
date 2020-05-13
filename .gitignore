@@ -1,9 +1,9 @@
+# project files
+.idea
 .Rproj.user
 .Rhistory
-.RData
 .Ruserdata
-.idea
-report-*
-data_out/*
-GOOGLE_ANALYTICS.token
+.RData
 
+# don't add the GA token file
+GOOGLE_ANALYTICS.token
