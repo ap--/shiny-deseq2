@@ -1,0 +1,5 @@
+,color,treatment
+Experiment1,RED,CONTROL
+Experiment2,GREEN,CONTROL
+Experiment3,RED,TEST
+Experiment4,GREEN,TEST
