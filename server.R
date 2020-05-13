@@ -2,6 +2,14 @@
 # ===================
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
+set_menu_item_class <- function(selector, class_, state) {
+  if (state) {
+    shinyjs::addClass(selector = selector, class = class_)
+  } else {
+    shinyjs::removeClass(selector = selector, class = class_)
+  }
+}
+
 # Define server logic ----
 server <- function(input, output) {
   # store common state in reactiveValues
@@ -11,6 +19,19 @@ server <- function(input, output) {
     num_conditions = 0,
     num_unique_conditions = 0
   )
+
+  observe({
+    is_enabled <- state$num_genes > 0 & state$num_conditions > 0
+    for (tab_id in list("data-stats", "analysis")) {
+      selector <- sprintf("a[data-value=%s]", tab_id)
+      set_menu_item_class(selector, "item-disabled", !is_enabled)
+    }
+    for (tab_id in list("data-download", "data-visualization")) {
+      selector <- sprintf("a[data-value=%s]", tab_id)
+      # todo: enable after
+      set_menu_item_class(selector, "item-disabled", TRUE)
+    }
+  })
 
   # TAB1 --------
   # feature counts ----

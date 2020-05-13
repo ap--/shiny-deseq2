@@ -1,0 +1,5 @@
+
+a.item-disabled[data-toggle=tab] {
+    pointer-events: none;
+    color: darkred !important;
+}
