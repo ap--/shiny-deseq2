@@ -121,9 +121,10 @@ server <- function(input, output) {
       rownames_to_column(var = "___condition___")
     # ? seems I need to assign for the implicit return in expressions to work with pipes
     df <- data_fc_filter_0() %>%
-      # todo: really should not allow gene column...
-      rownames_to_column(var = "gene") %>%
-      pivot_longer(-gene, names_to = "condition", values_to = "counts") %>%
+      # todo: and should not allow ___gene___ column...
+      rownames_to_column(var = "___gene___") %>%
+      pivot_longer(-"___gene___", names_to = "condition", values_to = "counts") %>%
+      rename(gene = "___gene___") %>%
       # filter genes
       group_by(gene) %>%
       filter(sum(counts) >= input$min_total_counts) %>%
