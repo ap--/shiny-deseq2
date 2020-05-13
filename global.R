@@ -1,5 +1,5 @@
-# matt-deseq2 global
-# ==================
+# shiny-deseq2 global
+# ===================
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
 # imports ----

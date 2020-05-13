@@ -1,10 +1,10 @@
-# matt-deseq2 ui
-# ==============
+# shiny-deseq2 ui
+# ===============
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
 
 dash_header <- dashboardHeader(
-  title = "matt-deseq2"
+  title = "shiny-deseq2"
 )
 
 dash_sidebar <- dashboardSidebar(

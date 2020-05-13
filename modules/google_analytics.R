@@ -1,5 +1,5 @@
-# matt-deseq2 GA helper
-# =====================
+# shiny-deseq2 GA helper
+# ======================
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
 # Come to the Python side.

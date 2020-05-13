@@ -1,5 +1,5 @@
-# matt-deseq2 rowname colnames select module
-# ==========================================
+# shiny-deseq2 rowname colnames select module
+# ===========================================
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
 # Module UI function

@@ -1,11 +1,11 @@
-# matt-deseq2
+# shiny-deseq2
 PORT ?= 8080
 
 .PHONY: help run debug
 
 help:
 	@echo
-	@echo "matt-deseq2 usage:"
+	@echo "shiny-deseq2 usage:"
 	@echo "  make <target>"
 	@echo
 	@echo "targets:"

@@ -1,5 +1,5 @@
-# matt-deseq2 csv upload module
-# =============================
+# shiny-deseq2 csv upload module
+# ==============================
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 # see https://shiny.rstudio.com/articles/modules.html for reference
 

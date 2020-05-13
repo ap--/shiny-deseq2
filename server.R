@@ -1,5 +1,5 @@
-# matt-deseq2 server
-# ==================
+# shiny-deseq2 server
+# ===================
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
 # Define server logic ----
