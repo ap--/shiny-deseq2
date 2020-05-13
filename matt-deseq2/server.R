@@ -33,6 +33,7 @@ server <- function(input, output) {
     df <- data_feature_counts()
     req(selection$rownames, selection$colnames, df)
     all_selected <- union(selection$rownames, selection$colnames)
+    # implicit return of variables makes me uncomfortable...
     df <- df[, all_selected] %>%
       remove_rownames() %>%
       column_to_rownames(var = selection$rownames) %>%
@@ -134,7 +135,7 @@ server <- function(input, output) {
   # TAB2 --------
   output$data_stats_hist_all <- renderPlot({
     df <- df_tidy()
-    # fixme: hist renders significantly faster than geom_histogram
+    # fixme: hist renders significantly faster than ggplot geom_histogram on first page load
     # hist(
     #   as.matrix(log2(df$counts + 1)),
     #   breaks = 100,
