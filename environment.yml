@@ -1,0 +1,25 @@
+name: shiny-deseq2
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  # base r environment
+  - r-base=3.6
+  - r-essentials=3.6  # this includes the tidyverse
+
+  # extra packages
+  - r-dt  # R to js DataTables
+  - r-here
+  - r-tictoc
+
+  # shiny
+  - r-shiny
+  - r-shinydashboard
+  - r-shinycssloaders
+  - r-shinyjs
+
+  # DESeq2
+  - bioconductor-deseq2=1.26
