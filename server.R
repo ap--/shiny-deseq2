@@ -17,7 +17,8 @@ server <- function(input, output) {
     num_genes = 0,
     num_unique_genes = 0,
     num_conditions = 0,
-    num_unique_conditions = 0
+    num_unique_conditions = 0,
+    num_filtered_genes = 0
   )
 
   observe({
@@ -135,6 +136,7 @@ server <- function(input, output) {
   })
 
 
+  # TAB2 --------
   df_tidy <- reactive({
     df_cd <- data_cd_filter_0() %>%
       # note: join by rownames isn't supported https://github.com/tidyverse/dplyr/issues/1270
@@ -153,8 +155,25 @@ server <- function(input, output) {
       ungroup() %>%
       left_join(df_cd, by = c("condition" = "___condition___"))
   })
+  observe({
+    state$num_filtered_genes <- n_distinct(df_tidy()$gene)
+  })
+  output$data_stats_filtered_genes <- renderValueBox({
+    if (state$num_unique_genes == 0 | state$num_filtered_genes == 0) {
+      color <- "red"
+    } else if (state$num_filtered_genes / state$num_unique_genes < 0.5) {
+      color <- "yellow"
+    } else {
+      color <- "green"
+    }
+    valueBox(
+      subtitle = "Filtered Genes",
+      value = str_glue("{filtered} / {total}", filtered = state$num_filtered_genes, total = state$num_unique_genes),
+      color = color,
+      icon = icon("dna")
+    )
+  })
 
-  # TAB2 --------
   output$data_stats_hist_all <- renderPlot({
     df <- df_tidy()
     # fixme: hist renders significantly faster than ggplot geom_histogram on first page load

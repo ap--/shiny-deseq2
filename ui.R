@@ -124,7 +124,7 @@ dash_body <- dashboardBody(
       h2("Data Statistics"),
 
       fluidRow(
-        div(class = "col-sm-12 col-md-9 col-lg-7",
+        div(class = "col-sm-12 col-md-7",
           box(
             title = "Filter genes",
             width = "100%",
@@ -148,6 +148,9 @@ dash_body <- dashboardBody(
               )
             )
           )
+        ),
+        div(class = "col-sm-12 col-md-5",
+          valueBoxOutput("data_stats_filtered_genes", width = "100%"),
         )
       ),
 
