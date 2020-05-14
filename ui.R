@@ -41,34 +41,40 @@ dash_body <- dashboardBody(
       # Top Row: Feature Count Upload ----
       h2("Feature Counts"),
       fluidRow(
-        csvFileBoxInput(
-          inputId = "csv_feature_counts",
-          title = "Upload Feature Count Data",
-          width = 2,
-          text = "Please select a CSV file containing your feature counts for each gene."
+        div(class = "col-sm-6 col-md-3 col-lg-2",
+          csvFileBoxInput(
+            inputId = "csv_feature_counts",
+            title = "Upload Feature Count Data",
+            width = "100%",
+            text = "Please select a CSV file containing your feature counts for each gene."
+          )
         ),
-        indexColumnSelectBoxInput(
-          inputId = "select_rowcol_feature_counts",
-          title = "Configure Feature Count Data",
-          width = 2,
-          text = "Please configure the rownames and columns for the feature count data.",
-          rowname_label = "Gene Names",
-          columns_label = "Condition Columns"
+        div(class = "col-sm-6 col-md-3 col-lg-2",
+          indexColumnSelectBoxInput(
+            inputId = "select_rowcol_feature_counts",
+            title = "Configure Feature Count Data",
+            width = "100%",
+            text = "Please configure the rownames and columns for the feature count data.",
+            rowname_label = "Gene Names",
+            columns_label = "Condition Columns"
+          )
         ),
-        box(
-          title = "Feature Counts",
-          width = 8,
-          collapsible = TRUE,
-          solidHeader = FALSE,
-          p(
-            class = "text-muted",
-            "Showing the Feature Count Data loaded from your CSV"
-          ),
-          column(
-            DT::dataTableOutput(
-              outputId = "csv_feature_count_table"
+        div(class = "col-sm-12 col-md-6 col-lg-8",
+          box(
+            title = "Feature Counts",
+            width = "100%",
+            collapsible = TRUE,
+            solidHeader = FALSE,
+            p(
+              class = "text-muted",
+              "Showing the Feature Count Data loaded from your CSV"
             ),
-            width = 12
+            column(
+              DT::dataTableOutput(
+                outputId = "csv_feature_count_table"
+              ),
+              width = 12
+            )
           )
         )
       ),
@@ -76,32 +82,38 @@ dash_body <- dashboardBody(
       # Bottom Row: Column Data Upload ----
       h2("Condition Meta Data"),
       fluidRow(
-        csvFileBoxInput(
-          inputId = "csv_column_data",
-          title = "Upload Column Data",
-          width = 2,
-          text = "Please select a CSV file containing the column metadata describing your
-          experiment conditions."
+        div(class = "col-sm-6 col-md-3 col-lg-2",
+          csvFileBoxInput(
+            inputId = "csv_column_data",
+            title = "Upload Column Data",
+            width = "100%",
+            text = "Please select a CSV file containing the column metadata describing your
+            experiment conditions."
+          )
         ),
-        indexColumnSelectBoxInput(
-          inputId = "select_rowcol_column_data",
-          title = "Configure Column Data",
-          width = 2,
-          text = "Please configure the rownames and columns for the column data.",
-          rowname_label = "Condition Labels",
-          columns_label = "Select Meta Data Columns"
+        div(class = "col-sm-6 col-md-3 col-lg-2",
+          indexColumnSelectBoxInput(
+            inputId = "select_rowcol_column_data",
+            title = "Configure Column Data",
+            width = "100%",
+            text = "Please configure the rownames and columns for the column data.",
+            rowname_label = "Condition Labels",
+            columns_label = "Select Meta Data Columns"
+          )
         ),
-        box(
-          title = "Column Data",
-          width = 8,
-          collapsible = TRUE,
-          solidHeader = FALSE,
-          p(
-            class = "text-muted",
-            "Showing the Column Data loaded from your CSV"
-          ),
-          DT::dataTableOutput(
-            outputId = "csv_column_data_table"
+        div(class = "col-sm-12 col-md-6 col-lg-8",
+          box(
+            title = "Column Data",
+            width = "100%",
+            collapsible = TRUE,
+            solidHeader = FALSE,
+            p(
+              class = "text-muted",
+              "Showing the Column Data loaded from your CSV"
+            ),
+            DT::dataTableOutput(
+              outputId = "csv_column_data_table"
+            )
           )
         )
       )
@@ -112,28 +124,28 @@ dash_body <- dashboardBody(
       h2("Data Statistics"),
 
       fluidRow(
-        box(
-          title = "Filter genes",
-          width = 9,
-          collapsible = TRUE,
-          solidHeader = FALSE,
-          p(
-            class = "text-muted",
-            "Adjust these sliders to remove rows that have less than Minimum Counts
-            total accross all conditions."
-          ),
-          column(
-            width = 6,
-            sliderInput("min_condition_counts", "Minimum Counts for each Condition:",
-              min = 0, max = 100,
-              value = 0
-            )
-          ),
-          column(
-            width = 6,
-            sliderInput("min_total_counts", "Minimum Total Counts:",
-              min = 0, max = 100,
-              value = 0
+        div(class = "col-sm-12 col-md-9 col-lg-7",
+          box(
+            title = "Filter genes",
+            width = "100%",
+            collapsible = FALSE,
+            solidHeader = FALSE,
+            p(
+              class = "text-muted",
+              "Adjust these sliders to remove rows that have less than Minimum Counts
+              total accross all conditions."
+            ),
+            div(class = "col-sm-12 col-md-6",
+              sliderInput("min_condition_counts", "Minimum Counts for each Condition:",
+                min = 0, max = 100,
+                value = 0
+              )
+            ),
+            div(class = "col-sm-12 col-md-6",
+              sliderInput("min_total_counts", "Minimum Total Counts:",
+                min = 0, max = 100,
+                value = 0
+              )
             )
           )
         )
