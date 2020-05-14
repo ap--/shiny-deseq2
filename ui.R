@@ -41,7 +41,8 @@ dash_body <- dashboardBody(
       # Top Row: Feature Count Upload ----
       h2("Feature Counts"),
       fluidRow(
-        div(class = "col-sm-6 col-md-3 col-lg-2",
+        div(
+          class = "col-sm-6 col-md-3 col-lg-2",
           csvFileBoxInput(
             inputId = "csv_feature_counts",
             title = "Upload Feature Count Data",
@@ -49,7 +50,8 @@ dash_body <- dashboardBody(
             text = "Please select a CSV file containing your feature counts for each gene."
           )
         ),
-        div(class = "col-sm-6 col-md-3 col-lg-2",
+        div(
+          class = "col-sm-6 col-md-3 col-lg-2",
           indexColumnSelectBoxInput(
             inputId = "select_rowcol_feature_counts",
             title = "Configure Feature Count Data",
@@ -59,7 +61,8 @@ dash_body <- dashboardBody(
             columns_label = "Condition Columns"
           )
         ),
-        div(class = "col-sm-12 col-md-6 col-lg-8",
+        div(
+          class = "col-sm-12 col-md-6 col-lg-8",
           box(
             title = "Feature Counts",
             width = "100%",
@@ -82,7 +85,8 @@ dash_body <- dashboardBody(
       # Bottom Row: Column Data Upload ----
       h2("Condition Meta Data"),
       fluidRow(
-        div(class = "col-sm-6 col-md-3 col-lg-2",
+        div(
+          class = "col-sm-6 col-md-3 col-lg-2",
           csvFileBoxInput(
             inputId = "csv_column_data",
             title = "Upload Column Data",
@@ -91,7 +95,8 @@ dash_body <- dashboardBody(
             experiment conditions."
           )
         ),
-        div(class = "col-sm-6 col-md-3 col-lg-2",
+        div(
+          class = "col-sm-6 col-md-3 col-lg-2",
           indexColumnSelectBoxInput(
             inputId = "select_rowcol_column_data",
             title = "Configure Column Data",
@@ -101,7 +106,8 @@ dash_body <- dashboardBody(
             columns_label = "Select Meta Data Columns"
           )
         ),
-        div(class = "col-sm-12 col-md-6 col-lg-8",
+        div(
+          class = "col-sm-12 col-md-6 col-lg-8",
           box(
             title = "Column Data",
             width = "100%",
@@ -124,7 +130,8 @@ dash_body <- dashboardBody(
       h2("Data Statistics"),
 
       fluidRow(
-        div(class = "col-sm-12 col-md-7",
+        div(
+          class = "col-sm-12 col-md-7",
           box(
             title = "Filter genes",
             width = "100%",
@@ -135,13 +142,15 @@ dash_body <- dashboardBody(
               "Adjust these sliders to remove rows that have less than Minimum Counts
               total accross all conditions."
             ),
-            div(class = "col-sm-12 col-md-6",
+            div(
+              class = "col-sm-12 col-md-6",
               sliderInput("min_condition_counts", "Minimum Counts for each Condition:",
                 min = 0, max = 100,
                 value = 0
               )
             ),
-            div(class = "col-sm-12 col-md-6",
+            div(
+              class = "col-sm-12 col-md-6",
               sliderInput("min_total_counts", "Minimum Total Counts:",
                 min = 0, max = 100,
                 value = 0
@@ -149,7 +158,8 @@ dash_body <- dashboardBody(
             )
           )
         ),
-        div(class = "col-sm-12 col-md-5",
+        div(
+          class = "col-sm-12 col-md-5",
           valueBoxOutput("data_stats_filtered_genes", width = "100%"),
         )
       ),
