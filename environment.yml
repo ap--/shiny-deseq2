@@ -13,7 +13,6 @@ dependencies:
   # extra packages
   - r-dt  # R to js DataTables
   - r-here
-  - r-tictoc
 
   # shiny
   - r-shiny

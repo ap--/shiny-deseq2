@@ -1,0 +1,11 @@
+name: shiny-deseq2
+
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  # extra dev packages
+  - r-tictoc
+  - r-shinytest
