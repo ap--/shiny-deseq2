@@ -27,6 +27,9 @@ debug:
 test:
 	R -f run_tests.R
 
+deploy:
+	R -f deploy_app.R
+
 env-production:
 	conda env create --force -f=environment.yml -n shiny-deseq2
 

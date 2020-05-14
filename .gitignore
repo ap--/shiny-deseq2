@@ -7,3 +7,8 @@
 
 # don't add the GA token file
 GOOGLE_ANALYTICS.token
+# and don't add the shinyapps.io secrets
+SHINYAPPS_SECRET.R
+
+# folders
+rsconnect/*
