@@ -13,8 +13,8 @@ library(tictoc)
 library(shinycssloaders)
 
 # Google Analytics ----
-source('modules/google_analytics.R', local = FALSE)
-GA_TOKEN <- str_trim(read_file(here("GOOGLE_ANALYTICS.token")))
+source("modules/google_analytics.R", local = FALSE)
+GA_TOKEN <- google_analytics_read_token_file(here("GOOGLE_ANALYTICS.token"))
 
 # Reusable Modules ----
 source("modules/csv_file_box_input.R", local = FALSE)

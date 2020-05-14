@@ -20,7 +20,7 @@ dash_sidebar <- dashboardSidebar(
 dash_body <- dashboardBody(
   tags$head(
     # Google Analytics Token, see `modules/google_analytics.R`
-    `_google_analytics_tag_html`(GA_TOKEN),
+    google_analytics_tag_html(GA_TOKEN),
     # include custom.css
     tags$link(rel = "stylesheet", type = "text/css", href = "custom.css")
   ),
