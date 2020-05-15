@@ -1,0 +1,26 @@
+name: Test if the app is shiny
+on: [push]
+
+jobs:
+  shinytest:
+    name: Shiny Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: goanpeca/setup-miniconda@v1
+        with:
+          auto-update-conda: true
+          python-version: 3.8
+          activate-environment: shiny-deseq2
+          environment-file: environment.yml
+      - name: conda info
+        shell: bash -l {0}
+        run: conda info
+      - name: install dev env
+        shell: bash -l {0}
+        run: |
+          conda env update -f environment-dev.yml
+      - name: run shinytests
+        shell: bash -l {0}
+        run: |
+          make test
