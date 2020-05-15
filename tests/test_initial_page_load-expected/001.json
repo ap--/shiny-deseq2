@@ -1,0 +1,77 @@
+{
+  "input": {
+    "csv_column_data-csvfile": null,
+    "csv_column_data-header": "File has a header",
+    "csv_column_data-quote": "\"",
+    "csv_column_data-sep": ",",
+    "csv_feature_counts-csvfile": null,
+    "csv_feature_counts-header": "File has a header",
+    "csv_feature_counts-quote": "\"",
+    "csv_feature_counts-sep": ",",
+    "min_condition_counts": 0,
+    "min_total_counts": 0,
+    "select_rowcol_column_data-rowname_column": "",
+    "select_rowcol_column_data-selected_columns": null,
+    "select_rowcol_feature_counts-rowname_column": "",
+    "select_rowcol_feature_counts-selected_columns": null,
+    "sidebarCollapsed": false,
+    "sidebarItemExpanded": null
+  },
+  "output": {
+    "csv_column_data_table": [
+      "",
+      "NULL",
+      "c(\"shiny.silent.error\", \"validation\")"
+    ],
+    "csv_feature_count_table": [
+      "",
+      "NULL",
+      "c(\"shiny.silent.error\", \"validation\")"
+    ],
+    "data_upload_value_box_conditions": {
+      "html": "<div class=\"small-box bg-red\">\n  <div class=\"inner\">\n    <h3>0<\/h3>\n    <p>Number of Experiment Conditions<\/p>\n  <\/div>\n  <div class=\"icon-large\">\n    <i class=\"fa fa-vials\"><\/i>\n  <\/div>\n<\/div>",
+      "deps": [
+        {
+          "name": "font-awesome",
+          "version": "5.3.1",
+          "src": {
+            "href": "font-awesome-5.3.1"
+          },
+          "meta": null,
+          "script": null,
+          "stylesheet": [
+            "css/all.min.css",
+            "css/v4-shims.min.css"
+          ],
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        }
+      ]
+    },
+    "data_upload_value_box_genes": {
+      "html": "<div class=\"small-box bg-red\">\n  <div class=\"inner\">\n    <h3>0<\/h3>\n    <p>Number of Genes<\/p>\n  <\/div>\n  <div class=\"icon-large\">\n    <i class=\"fa fa-dna\"><\/i>\n  <\/div>\n<\/div>",
+      "deps": [
+        {
+          "name": "font-awesome",
+          "version": "5.3.1",
+          "src": {
+            "href": "font-awesome-5.3.1"
+          },
+          "meta": null,
+          "script": null,
+          "stylesheet": [
+            "css/all.min.css",
+            "css/v4-shims.min.css"
+          ],
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        }
+      ]
+    }
+  },
+  "export": {
+
+  }
+}
