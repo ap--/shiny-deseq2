@@ -1,4 +1,4 @@
-name: Test if the app is shiny
+name: ShinyTest
 on: [push]
 
 jobs:

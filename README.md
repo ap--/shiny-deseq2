@@ -1,5 +1,7 @@
 # shiny-deseq2 &mdash; a not so shiny deseq2 app
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ap--/shiny-deseq2/ShinyTest)
+
 I wanted to try see how difficult it is to make a shiny app.
 So here is a DESeq2 analysis running in R with a shiny frontend.
 
