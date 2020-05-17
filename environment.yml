@@ -7,8 +7,8 @@ channels:
 
 dependencies:
   # base r environment
-  - r-base=3.6
-  - r-essentials=3.6  # this includes the tidyverse
+  - r-base=4.0
+  - r-essentials=4.0  # this includes the tidyverse
 
   # extra packages
   - r-dt  # R to js DataTables
@@ -21,4 +21,5 @@ dependencies:
   - r-shinyjs
 
   # DESeq2
-  - bioconductor-deseq2=1.26
+  - r-biocmanager
+  - bioconductor-deseq2
