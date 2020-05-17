@@ -19,7 +19,7 @@ help:
 	@echo
 
 run:
-	R -e "shiny::runApp('./', port=$(PORT))"
+	R -e "shiny::shinyOptions(shiny.autoreload = TRUE); shiny::runApp('./', port=$(PORT))"
 
 debug:
 	R -e "shiny::runApp('./', port=$(PORT), display.mode='showcase')"
