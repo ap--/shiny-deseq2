@@ -13,6 +13,10 @@ library(RColorBrewer)
 library(tictoc)
 library(shinycssloaders)
 
+# App Settings:
+APP_NAME <- "shiny-deseq2"
+REPO_URL <- "https://github.com/ap--/shiny-deseq2"
+
 # Google Analytics ----
 source("modules/google_analytics.R", local = FALSE)
 GA_TOKEN <- google_analytics_read_token_file(here("GOOGLE_ANALYTICS.token"))

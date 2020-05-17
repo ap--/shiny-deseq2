@@ -4,7 +4,15 @@
 
 
 dash_header <- dashboardHeader(
-  title = "shiny-deseq2"
+  title = APP_NAME,
+  tags$li(
+    a(
+      href = REPO_URL,
+      icon("github"),
+      title = "Goto Github Repository"
+    ),
+    class = "dropdown"
+  )
 )
 
 dash_sidebar <- dashboardSidebar(
