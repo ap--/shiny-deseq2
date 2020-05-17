@@ -1,4 +1,4 @@
-app <- ShinyDriver$new("../", shinyOptions = list(launch.browser = TRUE))
+app <- ShinyDriver$new("../", loadTimeout = 10000)
 app$snapshotInit("test_data_upload_page")
 
 app$uploadFile(`csv_feature_counts-csvfile` = "input_data/featurecounts.csv") # <-- This should be the path to the file, relative to the app's tests/ directory

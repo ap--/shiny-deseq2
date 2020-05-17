@@ -47,5 +47,6 @@ env-production:
 env-development: env-production
 	conda env update -f=environment-dev.yml -n shiny-deseq2
 
+dev-create-test: export R_BROWSER = 'xdg-open'
 dev-create-test:
-	R -e "shinytest::recordTest('.', shinyOptions=list(launch.browser = TRUE))"
+	R -e "shinytest::recordTest('.', loadTimeout=10000)"
