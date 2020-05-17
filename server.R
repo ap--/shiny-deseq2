@@ -147,11 +147,11 @@ server <- function(input, output, session) {
       # todo: and should not allow ___gene___ column...
       rownames_to_column(var = "___gene___") %>%
       pivot_longer(-"___gene___", names_to = "condition", values_to = "counts") %>%
-      rename(gene = "___gene___") %>%
+      dplyr::rename(gene = "___gene___") %>%
       # filter genes
       group_by(gene) %>%
-      filter(sum(counts) >= input$min_total_counts) %>%
-      filter(all(counts >= input$min_condition_counts)) %>%
+      dplyr::filter(sum(counts) >= input$min_total_counts) %>%
+      dplyr::filter(all(counts >= input$min_condition_counts)) %>%
       ungroup() %>%
       left_join(df_cd, by = c("condition" = "___condition___"))
   })
