@@ -3,6 +3,7 @@
 # Created by: Andreas Poehlmann <andreas@poehlmann.io>
 
 # imports ----
+library(DESeq2) # DESeq2 masks quite a few tidyverse things, import first so that tidyverse masks everything
 library(tidyverse)
 library(here)
 library(shiny)
