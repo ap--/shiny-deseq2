@@ -10062,8 +10062,13 @@
     "csv_feature_counts-header": "File has a header",
     "csv_feature_counts-quote": "\"",
     "csv_feature_counts-sep": ",",
+    "design_columns": [
+      "color",
+      "treatment"
+    ],
     "min_condition_counts": 0,
     "min_total_counts": 0,
+    "run_deseq2": 0,
     "select_rowcol_column_data-rowname_column": "X",
     "select_rowcol_column_data-selected_columns": [
       "color",
