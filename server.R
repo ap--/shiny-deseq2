@@ -11,14 +11,15 @@ set_menu_item_class <- function(selector, class_, state) {
 }
 
 # Define server logic ----
-server <- function(input, output) {
+server <- function(input, output, session) {
   # store common state in reactiveValues
   state <- reactiveValues(
     num_genes = 0,
     num_unique_genes = 0,
     num_conditions = 0,
     num_unique_conditions = 0,
-    num_filtered_genes = 0
+    num_filtered_genes = 0,
+    has_dds = FALSE
   )
 
   observe({
@@ -29,8 +30,7 @@ server <- function(input, output) {
     }
     for (tab_id in list("data-download", "data-visualization")) {
       selector <- sprintf("a[data-value=%s]", tab_id)
-      # todo: enable after
-      set_menu_item_class(selector, "item-disabled", TRUE)
+      set_menu_item_class(selector, "item-disabled", !state$has_dds)
     }
   })
 
@@ -212,5 +212,39 @@ server <- function(input, output) {
     #   ylab = "Number of gene samples",
     #   las = 1
     # )
+  })
+
+
+  # TAB 3 ----
+  dds <- reactiveVal(value = NULL)
+  observe({
+    conditions <- data_select_cols_column_data$colnames
+    updateSelectInput(
+      session,
+      inputId = "design_columns",
+      choices = conditions,
+      selected = conditions
+    )
+  })
+  observeEvent(input$run_deseq2, {
+    countData <- data_fc_filter_0()
+    colData <- data_cd_filter_0()
+    selected <- input$design_columns
+    validate(
+      need(!is.null(selected), "Please select at least one condition")
+    )
+    withProgress(message = "Running DESeq2 Analysis", {
+      .dds <- DESeq2::DESeqDataSetFromMatrix(
+        countData = countData,
+        colData = colData,
+        design = as.formula(
+          paste("~ ", paste(selected, collapse = " + "))
+        )
+      )
+      setProgress(value = 0.5)
+      dds(DESeq2::DESeq(.dds))
+      setProgress(value = 1.0)
+    })
+    state$has_dds <- TRUE
   })
 }

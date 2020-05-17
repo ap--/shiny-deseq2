@@ -198,7 +198,28 @@ dash_body <- dashboardBody(
 
     tabItem(
       tabName = "analysis",
-      h2("DESeq2 Analysis")
+      h2("DESeq2 Analysis"),
+
+      fluidRow(
+        box(
+          title = "Box plots of individual conditions",
+          width = 6,
+          collapsible = TRUE,
+          solidHeader = FALSE,
+          p(
+            class = "text-muted",
+            "Configure the DESeq2 analysis design and run it."
+          ),
+          selectInput(
+            inputId = "design_columns",
+            label = "DESeq2 design",
+            choices = "",
+            selected = NULL,
+            multiple = TRUE
+          ),
+          actionButton(inputId = "run_deseq2", label = "Run DESeq2")
+        )
+      )
     ),
 
     tabItem(
