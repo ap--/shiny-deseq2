@@ -12,4 +12,7 @@ if (!file.exists("SHINYAPPS_SECRET.R")) {
 }
 source("SHINYAPPS_SECRET.R")
 
+library(BiocManager)  # fixes bioconductor depenceny error on shinyapps.io
+options(repos = BiocManager::repositories())
+
 deployApp(".", appName = "shiny-deseq2")
