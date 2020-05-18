@@ -21,7 +21,8 @@ dash_sidebar <- dashboardSidebar(
     menuItem("Data Statistics", tabName = "data-stats", icon = icon("chart-bar")),
     menuItem("DESeq2 Analysis", tabName = "analysis", icon = icon("microscope")),
     menuItem("Data Download", tabName = "data-download", icon = icon("download")),
-    menuItem("Visualization", tabName = "data-visualization", icon = icon("chart-pie"))
+    menuItem("Visualization", tabName = "data-visualization", icon = icon("chart-pie")),
+    menuItem("Help", tabName = "help", icon = icon("info-circle"))
   )
 )
 
@@ -306,6 +307,11 @@ dash_body <- dashboardBody(
           )
         )
       )
+    ),
+
+    tabItem(
+      tabName = "help",
+      uiOutput('readme')
     )
   )
 )

@@ -296,4 +296,16 @@ server <- function(input, output, session) {
   output$data_visualization_plot_dispest <- renderPlot({
     DESeq2::plotDispEsts(res$dds)
   })
+
+  # TAB 5 ----
+  output$readme <- renderUI({
+    htmlOptions <- markdown::markdownHTMLOptions(defaults = TRUE)
+    htmlOptions <- htmlOptions[htmlOptions != 'base64_images']
+
+    HTML(markdown::markdownToHTML(
+      'README.md',
+      fragment.only = TRUE,
+      options = htmlOptions
+    ))
+  })
 }
