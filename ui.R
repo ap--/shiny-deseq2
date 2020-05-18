@@ -312,6 +312,7 @@ dash_body <- dashboardBody(
 
 # The UI main function
 ui <- dashboardPage(
+  skin = "red",
   dash_header,
   dash_sidebar,
   dash_body,
