@@ -41,4 +41,6 @@ make run
 ##### Develop
 
 I setup `shinytest` for this app. Simply do `make test` to run the tests. If you want to add a new test run
-`make dev-create-test` and interactively create a new test case in your browser.
+`make dev-create-test` and interactively create a new test case in your browser. Note: all test will fail initially
+if you add more reactive state to the app or change the main layout. You can run `make test-interactive` to
+step through the failed tests and accept changes if they are cosmetic only.

@@ -1,4 +1,5 @@
-# shiny-deseq2
+# shiny-deseq2 Makefile
+# Created by: Andreas Poehlmann <andreas@poehlmann.io>
 PORT ?= 8080
 
 .PHONY: help run debug env-production env-development dev-create-test test
