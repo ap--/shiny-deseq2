@@ -2,7 +2,7 @@
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ap--/shiny-deseq2/ShinyTest)
 
-I wanted to try see how difficult it is to make a shiny app.
+I wanted to see how difficult it is to make a shiny app.
 So here is a DESeq2 analysis running in R with a shiny frontend.
 <br>
 _Disclaimer: I am no expert at all doing differential gene expression analysis, I just needed something to build the app for._
@@ -23,30 +23,11 @@ and
 
 ### Screenshots
 
-<style type="text/css" scoped>
-div.image-grid + ul {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-  height: 105px;
-  overflow-y: hidden;
-}
-div.image-grid + ul li {
-  width: 200px;
-  overflow-y: hidden;
-  padding: 0 4px;
-}
-div.image-grid + ul img {
-  width: 100%;
-}
-</style>
-
-<div class="image-grid"></div>
-- [![Data Upload](readme/01_data_upload.png)](readme/01_data_upload.png)
-- [![Data Statistics](readme/02_data_stats.png)](readme/02_data_stats.png)
-- [![DESeq2 Analysis](readme/03_analysis.png)](readme/03_analysis.png)
-- [![Data Download](readme/04_data_download.png)](readme/04_data_download.png)
-- [![Data Visualization](readme/05_data_vis.png)](readme/05_data_vis.png)
+[![Data Upload](readme/thumbnail_01_data_upload.png)](readme/01_data_upload.png)
+[![Data Statistics](readme/thumbnail_02_data_stats.png)](readme/02_data_stats.png)
+[![DESeq2 Analysis](readme/thumbnail_03_analysis.png)](readme/03_analysis.png)
+[![Data Download](readme/thumbnail_04_data_download.png)](readme/04_data_download.png)
+[![Data Visualization](readme/thumbnail_05_data_vis.png)](readme/05_data_vis.png)
 
 ### Notes
 
