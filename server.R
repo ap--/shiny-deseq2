@@ -244,10 +244,10 @@ server <- function(input, output, session) {
           paste("~ ", paste(selected, collapse = " + "))
         )
       )
-      setProgress(value = 1/3, message = "DESeq2 Running Analysis")
+      setProgress(value = 1 / 3, message = "DESeq2 Running Analysis")
       dds <- DESeq2::DESeq(.dds)
       res$dds <- dds
-      setProgress(value = 2/3, message = "DESeq2 Transforming Results")
+      setProgress(value = 2 / 3, message = "DESeq2 Transforming Results")
       res$rld <- DESeq2::rlogTransformation(dds)
       setProgress(value = 1.0, message = "DESeq2 Completed")
     })
@@ -269,7 +269,7 @@ server <- function(input, output, session) {
         significant = sum(df$padj < 0.1, na.rm = TRUE),
         total = nrow(df)
       ),
-      color = 'green',
+      color = "green",
       icon = icon("dna")
     )
   })
@@ -290,11 +290,10 @@ server <- function(input, output, session) {
 
   # TAB 5 ----
   output$data_visualization_plot_pca <- renderPlot({
-    DESeq2::plotPCA(res$rld, intgroup=input$design_columns)
+    DESeq2::plotPCA(res$rld, intgroup = input$design_columns)
   })
 
   output$data_visualization_plot_dispest <- renderPlot({
     DESeq2::plotDispEsts(res$dds)
   })
-
 }
