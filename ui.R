@@ -278,7 +278,34 @@ dash_body <- dashboardBody(
 
     tabItem(
       tabName = "data-visualization",
-      h2("Visualization")
+      h2("Visualization"),
+
+      fluidRow(
+        div(
+          class = "col-sm-12 col-md-6",
+          box(
+            title = "PCA of counts dataset",
+            width = "100%",
+            collapsible = TRUE,
+            solidHeader = FALSE,
+            plotOutput(
+              outputId = "data_visualization_plot_pca"
+            ) %>% shinycssloaders::withSpinner()
+          )
+        ),
+        div(
+          class = "col-sm-12 col-md-6",
+          box(
+            title = "Dispersion Estimates",
+            width = "100%",
+            collapsible = TRUE,
+            solidHeader = FALSE,
+            plotOutput(
+              outputId = "data_visualization_plot_dispest"
+            ) %>% shinycssloaders::withSpinner()
+          )
+        )
+      )
     )
   )
 )

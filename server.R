@@ -289,4 +289,13 @@ server <- function(input, output, session) {
     options = list(scrollX = TRUE)
   )
 
+  # TAB 5 ----
+  output$data_visualization_plot_pca <- renderPlot({
+    DESeq2::plotPCA(res$rld, intgroup=input$design_columns)
+  })
+
+  output$data_visualization_plot_dispest <- renderPlot({
+    DESeq2::plotDispEsts(res$dds)
+  })
+
 }
