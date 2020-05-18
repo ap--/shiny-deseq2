@@ -216,6 +216,10 @@ server <- function(input, output, session) {
 
 
   # TAB 3 ----
+  res <- reactiveValues(
+    dds = NULL,
+    rld = NULL
+  )
   dds <- reactiveVal(value = NULL)
   observe({
     conditions <- data_select_cols_column_data$colnames
@@ -241,10 +245,48 @@ server <- function(input, output, session) {
           paste("~ ", paste(selected, collapse = " + "))
         )
       )
-      setProgress(value = 0.5)
-      dds(DESeq2::DESeq(.dds))
+      setProgress(value = 1/3)
+      dds <- DESeq2::DESeq(.dds)
+      res$dds <- dds
+      setProgress(value = 2/3)
+      res$rld <- DESeq2::rlogTransformation(dds)
       setProgress(value = 1.0)
     })
     state$has_dds <- TRUE
   })
+
+  # TAB 4 ----
+  dds_results <- reactive({
+    dds_df <- results(res$dds)
+    dds_df <- dds_df[order(dds_df$padj), ]
+    as.data.frame(dds_df)
+  })
+  output$data_download_padj <- renderValueBox({
+    df <- dds_results()
+    valueBox(
+      subtitle = "Genes with adjusted p-value < 0.1",
+      value = str_glue(
+        "{significant} / {total}",
+        significant = sum(df$padj < 0.1, na.rm = TRUE),
+        total = nrow(df)
+      ),
+      color = 'green',
+      icon = icon("dna")
+    )
+  })
+  output$downloadDESeq2 <- downloadHandler(
+    filename = function() {
+      "shiny-deseq2-results.csv"
+    },
+    content = function(file) {
+      write.csv(dds_results(), file, row.names = TRUE)
+    }
+  )
+  output$deseq_results_table <- DT::renderDataTable(
+    {
+      dds_results()
+    },
+    options = list(scrollX = TRUE)
+  )
+
 }

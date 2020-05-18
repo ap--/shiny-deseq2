@@ -232,7 +232,48 @@ dash_body <- dashboardBody(
 
     tabItem(
       tabName = "data-download",
-      h2("Data Download")
+      h2("Data Download"),
+      fluidRow(
+        div(
+          class = "col-sm-12 col-md-5",
+          valueBoxOutput("data_download_padj", width = "100%"),
+        ),
+        div(
+          class = "col-sm-12 col-md-6",
+          box(
+            title = "Download Results",
+            width = "100%",
+            collapsible = FALSE,
+            solidHeader = FALSE,
+            p(
+              class = "text-muted",
+              "Click download to save the results as CSV"
+            ),
+            downloadButton("downloadDESeq2", "Download")
+          )
+        )
+      ),
+      fluidRow(
+        div(
+          class = "col-sm-12",
+          box(
+            title = "Analysis Results",
+            width = "100%",
+            collapsible = FALSE,
+            solidHeader = FALSE,
+            p(
+              class = "text-muted",
+              "Showing the DESeq2 Results"
+            ),
+            column(
+              DT::dataTableOutput(
+                outputId = "deseq_results_table"
+              ) %>% shinycssloaders::withSpinner(),
+              width = 12
+            )
+          )
+        )
+      )
     ),
 
     tabItem(
