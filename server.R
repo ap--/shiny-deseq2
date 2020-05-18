@@ -220,7 +220,6 @@ server <- function(input, output, session) {
     dds = NULL,
     rld = NULL
   )
-  dds <- reactiveVal(value = NULL)
   observe({
     conditions <- data_select_cols_column_data$colnames
     updateSelectInput(
@@ -237,7 +236,7 @@ server <- function(input, output, session) {
     validate(
       need(!is.null(selected), "Please select at least one condition")
     )
-    withProgress(message = "Running DESeq2 Analysis", {
+    withProgress(message = "DESeq2 Creating Inputs", {
       .dds <- DESeq2::DESeqDataSetFromMatrix(
         countData = countData,
         colData = colData,
@@ -245,12 +244,12 @@ server <- function(input, output, session) {
           paste("~ ", paste(selected, collapse = " + "))
         )
       )
-      setProgress(value = 1/3)
+      setProgress(value = 1/3, message = "DESeq2 Running Analysis")
       dds <- DESeq2::DESeq(.dds)
       res$dds <- dds
-      setProgress(value = 2/3)
+      setProgress(value = 2/3, message = "DESeq2 Transforming Results")
       res$rld <- DESeq2::rlogTransformation(dds)
-      setProgress(value = 1.0)
+      setProgress(value = 1.0, message = "DESeq2 Completed")
     })
     state$has_dds <- TRUE
   })
