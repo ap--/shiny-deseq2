@@ -24,3 +24,6 @@ GA_TOKEN <- google_analytics_read_token_file(here("GOOGLE_ANALYTICS.token"))
 # Reusable Modules ----
 source("modules/csv_file_box_input.R", local = FALSE)
 source("modules/index_column_select_box_input.R", local = FALSE)
+
+# Add readme resources
+shiny::addResourcePath('readme', './readme')

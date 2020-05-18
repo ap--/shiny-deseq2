@@ -21,6 +21,33 @@ and
 - If you find scientific mistakes anywhere in the analysis pipeline file a bug and let me know!
 - If you know better ways to do this, or visualize it send me a message!
 
+### Screenshots
+
+<style type="text/css" scoped>
+div.image-grid + ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  height: 105px;
+  overflow-y: hidden;
+}
+div.image-grid + ul li {
+  width: 200px;
+  overflow-y: hidden;
+  padding: 0 4px;
+}
+div.image-grid + ul img {
+  width: 100%;
+}
+</style>
+
+<div class="image-grid"></div>
+- [![Data Upload](readme/01_data_upload.png)](readme/01_data_upload.png)
+- [![Data Statistics](readme/02_data_stats.png)](readme/02_data_stats.png)
+- [![DESeq2 Analysis](readme/03_analysis.png)](readme/03_analysis.png)
+- [![Data Download](readme/04_data_download.png)](readme/04_data_download.png)
+- [![Data Visualization](readme/05_data_vis.png)](readme/05_data_vis.png)
+
 ### Notes
 
 To learn how to make shiny apps I tried to immediately start with best practices for organizing larger apps.
